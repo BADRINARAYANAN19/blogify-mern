@@ -1,0 +1,173 @@
+/* src/pages/SignupPage.css - Advanced Neon Glow Theme - MODIFIED FOR BLACK TEXT */
+
+:root {
+    /* Define Neon/Cyber Colors */
+    --neon-glow: #00ffff; /* Primary Cyan Neon Glow */
+    --neon-accent: #ff00ff; /* Secondary Magenta Accent */
+    --bg-dark: #121212;
+    --text-color: #f0f0f0;
+    --card-dark-bg: rgba(18, 18, 18, 0.85); /* Slightly transparent dark card */
+    --transition-fast: 0.3s;
+}
+
+/* --- Container & Background (Deep Dark) --- */
+.signup-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Deep Dark Background with Subtle Movement */
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #000000 100%);
+    background-size: 400% 400%;
+    animation: backgroundMove 25s ease infinite; /* Slow, hypnotic background shift */
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Signup Card (Neon Border & Lift) --- */
+.signup-card {
+    background: var(--card-dark-bg);
+    padding: 3rem; /* Slightly more padding */
+    width: 100%;
+    max-width: 400px; /* Wider card */
+    
+    /* Stronger Glassmorphism */
+    backdrop-filter: blur(15px);
+    
+    border-radius: 15px;
+    /* Neon Border Glow */
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.4); /* Strong initial glow */
+    
+    text-align: center;
+    animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+    transition: all var(--transition-fast) ease-in-out;
+}
+
+.signup-card:hover {
+    transform: scale(1.02); /* Slight scale on hover */
+    box-shadow: 0 0 50px var(--neon-accent), 0 10px 30px rgba(0, 0, 0, 0.5); /* Accent glow on hover */
+    border-color: var(--neon-accent);
+}
+
+/* --- Form Heading --- */
+.signup-card h2 {
+    color: var(--text-color);
+    text-shadow: 0 0 8px var(--neon-glow);
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+}
+
+/* --- Input Fields (Glow on Focus) --- */
+.signup-form input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    margin: 0.8rem 0;
+    border-radius: 8px;
+    
+    /* 🔥 MODIFIED: Input background to White for contrast 🔥 */
+    background-color: #ffffff; 
+    
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    
+    /* 🔥 MODIFIED: Input text color to Black 🔥 */
+    color: black; 
+    
+    font-size: 1rem;
+    transition: all 0.4s ease;
+}
+
+/* 💥 ADVANCED: Neon Focus Effect */
+.signup-form input:focus {
+    border-color: var(--neon-glow);
+    /* Shadow remains neon for style */
+    box-shadow: 0 0 12px var(--neon-glow), 0 0 5px rgba(0, 0, 0, 0.5); 
+    background-color: #f0f0f0; /* Slightly off-white on focus */
+    transform: translateX(5px); /* Slight horizontal shift on focus */
+    outline: none;
+}
+
+/* 🔥 FIX: Placeholder Color for light background (now dark grey) 🔥 */
+.signup-form input::placeholder {
+    color: #ffffff; 
+    opacity: 50; 
+}
+
+
+/* --- Submit Button (Pulsing Glow) --- */
+.signup-form button {
+    width: 100%;
+    /* Gradient for depth */
+    background: linear-gradient(90deg, var(--neon-glow), var(--neon-accent));
+    color: var(--bg-dark); /* Dark text on bright button */
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    
+    /* Button Glow and Pulse */
+    box-shadow: 0 0 8px var(--neon-glow);
+    animation: pulseButton 1.5s infinite alternate;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+/* Keyframes for Button Pulse */
+@keyframes pulseButton {
+    from { box-shadow: 0 0 8px var(--neon-glow); }
+    to { box-shadow: 0 0 15px var(--neon-accent), 0 0 25px var(--neon-glow); }
+}
+
+.signup-form button:hover {
+    transform: translateY(-3px); /* Lift on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    animation: none; /* Stop pulse on hover for smoother lift transition */
+}
+
+.signup-form button:active {
+    transform: translateY(0); /* Press effect */
+    box-shadow: 0 0 5px var(--neon-glow);
+}
+
+/* --- Error Box --- */
+.error-box {
+    background-color: #ff3366; /* Brightened error color */
+    color: var(--text-color);
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--neon-accent);
+    box-shadow: 0 0 10px var(--neon-accent);
+}
+
+/* --- Login Link --- */
+.login-link {
+    margin-top: 1.5rem;
+    color: #fafafa;
+}
+
+.login-link a {
+    color: var(--neon-glow);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.login-link a:hover {
+    color: var(--neon-accent);
+    text-shadow: 0 0 5px var(--neon-glow);
+}
+
+/* Initial card animation */
+@keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

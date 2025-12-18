@@ -1,0 +1,80 @@
+/* src/pages/SingleBlogPage.css */
+
+/* --- 1. Base Container and Page Entry --- */
+.single-blog-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /* Uses the global fadeIn animation */
+    animation: fadeIn 0.8s ease-out forwards; 
+}
+
+/* --- 2. Main Content Card (Paper) Styles --- */
+.blog-content-card {
+    /* Ensures the card is prominent */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important; 
+    transition: box-shadow 0.4s ease-in-out;
+}
+
+/* Optional: Slight hover effect for the main card */
+.blog-content-card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* --- 3. Header/Title Styling --- */
+.blog-title {
+    font-size: 2.8rem;
+    font-weight: 900 !important;
+    color: var(--text-dark); /* Defined in index.css */
+    border-bottom: 3px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 25px !important;
+}
+
+.blog-metadata {
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 40px !important;
+}
+
+/* --- 4. Core Content Area --- */
+.blog-body {
+    line-height: 1.8;
+    font-size: 1.15rem;
+    color: #4a4a4a;
+    /* Ensures readability for pre-formatted content (like Markdown) */
+    white-space: pre-wrap; 
+}
+
+/* Style for embedded paragraphs/text blocks */
+.blog-body p {
+    margin-bottom: 20px;
+}
+
+/* --- 5. Action Buttons (Edit/Delete) --- */
+
+/* Ensures button groups align well */
+.action-buttons-group {
+    /* Uses Material UI's Grid, but we can enhance the container */
+    padding: 10px 0;
+}
+
+/* Inherits hover/transform from global index.css */
+
+/* Custom styling for the Delete button to make it visually strong */
+.MuiButton-containedError {
+    background-color: var(--danger-color) !important;
+}
+
+.MuiButton-containedError:hover {
+    background-color: #c82333 !important;
+}
+
+/* Custom styling for the Edit button */
+.MuiButton-outlinedWarning {
+    color: #ff9800 !important;
+    border-color: #ff9800 !important;
+}
+
+.MuiButton-outlinedWarning:hover {
+    background-color: #fff3e0 !important;
+}
