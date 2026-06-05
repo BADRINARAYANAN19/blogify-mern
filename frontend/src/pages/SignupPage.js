@@ -19,7 +19,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 // If you have common styles, keep it, but the theme is handled inline here.
 
 // Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/blogs';
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -62,7 +62,7 @@ function SignupPage() {
 
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/signup`,
+        `${BACKEND_URL}/auth/signup`,
         {
           name: name.trim(),
           email: email.trim(),

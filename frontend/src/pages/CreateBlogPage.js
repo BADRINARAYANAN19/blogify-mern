@@ -13,7 +13,7 @@ import {
 import './CreateBlogPage.css';
 
 // Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/blogs';
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function CreateBlogPage() {
   const [title, setTitle] = useState('');
@@ -47,7 +47,7 @@ function CreateBlogPage() {
 
     try {
       await axios.post(
-        BACKEND_URL,
+        `${BACKEND_URL}/blogs`,
         { title: title.trim(), content: content.trim() },
         {
           headers: {

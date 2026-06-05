@@ -7,7 +7,7 @@ import './EditBlogPage.css';
 // 🔥 REMOVED NEON COLOR DEFINITIONS (Using standard MUI colors now)
 
 // Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/blogs';
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function EditBlogPage() {
     const { id } = useParams();
@@ -25,7 +25,7 @@ function EditBlogPage() {
 
         const fetchBlog = async () => {
             try {
-                const res = await axios.get(`${BACKEND_URL}/${id}`, { headers: { 'x-auth-token': token } });
+                const res = await axios.get(`${BACKEND_URL}/blogs/${id}`, { headers: { 'x-auth-token': token } });
                 setTitle(res.data.title);
                 setContent(res.data.content);
                 setLoading(false);
@@ -50,7 +50,7 @@ function EditBlogPage() {
         try {
             const updatedBlog = { title: title.trim(), content: content.trim() };
             
-            await axios.put(`${BACKEND_URL}/${id}`, updatedBlog, {
+            await axios.put(`${BACKEND_URL}/blogs/${id}`, updatedBlog, {
                 headers: { 'x-auth-token': token },
             });
 

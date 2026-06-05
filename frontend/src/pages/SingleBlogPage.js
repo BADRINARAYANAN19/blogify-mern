@@ -18,7 +18,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './SingleBlogPage.css';
 
 // Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/blogs';
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function SingleBlogPage() {
   const { id } = useParams();
@@ -36,7 +36,7 @@ function SingleBlogPage() {
     const token = localStorage.getItem('blogify-token');
 
     try {
-      const res = await axios.get(`${BACKEND_URL}/${id}`, {
+      const res = await axios.get(`${BACKEND_URL}/blogs/${id}`, {
         headers: token ? { 'x-auth-token': token } : {},
       });
 
@@ -92,7 +92,7 @@ function SingleBlogPage() {
     const token = localStorage.getItem('blogify-token');
 
     try {
-      await axios.delete(`${BACKEND_URL}/${id}`, {
+      await axios.delete(`${BACKEND_URL}/blogs/${id}`, {
         headers: { 'x-auth-token': token },
       });
       alert(`Blog "${blog.title}" deleted successfully.`);

@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import './DashboardPage.css';
 
 // Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/blogs';
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function DashboardPage() {
     const [blogs, setBlogs] = useState([]);
