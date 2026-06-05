@@ -29,8 +29,8 @@ function DashboardPage() {
         }
 
         try {
-            const res = await axios.get(BACKEND_URL, {
-                // 🚀 Using the correct x-auth-token header
+            // Using the imported BACKEND_URL
+            const res = await axios.get(`${BACKEND_URL}/blogs`, {
                 headers: { 'x-auth-token': token },
             });
             setBlogs(res.data);
@@ -49,17 +49,13 @@ function DashboardPage() {
         }
     };
     
-    // 🔥 LOGOUT FUNCTION ADDED 🔥
     const handleLogout = () => {
-        // 1. Token-a remove pannu
         localStorage.removeItem('blogify-token'); 
-        // 2. Login page-ku redirect pannu
         navigate('/login'); 
     };
-    // ----------------------------
 
     const truncateContent = (text, limit) => {
-        return text.length > limit ? text.substring(0, limit) + '...' : text;
+        return text && text.length > limit ? text.substring(0, limit) + '...' : text;
     };
 
     if (loading) {
@@ -73,7 +69,8 @@ function DashboardPage() {
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
-                <h1>My Blog Posts ({blogs.length})</h1>
+                {/* Optional chaining used here for safety */}
+                <h1>My Blog Posts ({blogs?.length || 0})</h1>
                 <p>Welcome back! Write, edit, and publish your blogs here.</p>
                 
                 <Box display="flex" justifyContent="center" gap={2} mt={3}>
@@ -81,15 +78,9 @@ function DashboardPage() {
                         variant="outlined" 
                         onClick={handleLogout}
                         sx={{ 
-                            borderRadius: '25px', 
-                            padding: '10px 25px', 
-                            fontWeight: 'bold', 
-                            color: 'white', 
-                            borderColor: 'rgba(255, 255, 255, 0.5)',
-                            '&:hover': {
-                                borderColor: 'white',
-                                background: 'rgba(255, 255, 255, 0.1)'
-                            }
+                            borderRadius: '25px', padding: '10px 25px', fontWeight: 'bold', 
+                            color: 'white', borderColor: 'rgba(255, 255, 255, 0.5)',
+                            '&:hover': { borderColor: 'white', background: 'rgba(255, 255, 255, 0.1)' }
                         }}
                     >
                         Logout
@@ -107,48 +98,35 @@ function DashboardPage() {
             </div>
 
             {error && (
-                <Alert 
-                    severity="error" 
-                    sx={{ mb: 3, maxWidth: '600px', margin: '0 auto 20px', borderRadius: '10px' }}
-                >
+                <Alert severity="error" sx={{ mb: 3, maxWidth: '600px', margin: '0 auto 20px', borderRadius: '10px' }}>
                     {error}
                 </Alert>
             )}
 
-            {blogs.length === 0 ? (
+            {blogs?.length === 0 ? (
                 <div className="no-blogs">
                     <div className="no-blogs-card">
                         <h2>You haven't published any blogs yet.</h2>
-                        <p style={{ marginBottom: '20px' }}>Start writing now and share your thoughts with the world!</p>
-                        <Button 
-                            variant="contained" 
-                            color="success" 
-                            sx={{ mt: 2, borderRadius: '25px', padding: '10px 25px', fontWeight: 'bold' }} 
-                            onClick={() => navigate('/create')}
-                        >
+                        <Button variant="contained" color="success" sx={{ mt: 2, borderRadius: '25px' }} onClick={() => navigate('/create')}>
                             Start Writing Now!
                         </Button>
                     </div>
                 </div>
             ) : (
                 <div className="blogs-grid">
-                    {blogs.map((blog) => (
+                    {/* FIXED: Optional chaining used here to prevent crash */}
+                    {blogs?.map((blog) => (
                         <div key={blog._id} className="blog-card" onClick={() => navigate(`/blog/${blog._id}`)}>
                             <h3>{truncateContent(blog.title, 50)}</h3>
                             <div className="blog-excerpt">
                                 {truncateContent(blog.content, 120)}
                             </div>
                             <div className="blog-meta" onClick={(e) => e.stopPropagation()}>
-                                <span className="blog-date">
-                                    📅 {new Date(blog.date).toLocaleDateString()}
-                                </span>
+                                <span className="blog-date">📅 {new Date(blog.date).toLocaleDateString()}</span>
                                 <div className="blog-actions">
                                     <button 
                                         className="action-btn edit-btn" 
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            navigate(`/edit/${blog._id}`);
-                                        }}
+                                        onClick={(e) => { e.stopPropagation(); navigate(`/edit/${blog._id}`); }}
                                     >
                                         Edit
                                     </button>
