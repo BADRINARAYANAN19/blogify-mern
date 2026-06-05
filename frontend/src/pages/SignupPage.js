@@ -18,7 +18,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 // Note: We don't need './LoginPage.css' if we use the inline style method below.
 // If you have common styles, keep it, but the theme is handled inline here.
 
-const BACKEND_URL = 'http://localhost:5000/api/auth';
+// Change this line:
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/blogs';
 
 function SignupPage() {
   const [formData, setFormData] = useState({

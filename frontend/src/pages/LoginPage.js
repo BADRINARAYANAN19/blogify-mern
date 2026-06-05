@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { Typography, TextField, Button, Box, Paper, Alert, CircularProgress } from '@mui/material';
 
-const BACKEND_URL = 'http://localhost:5000/api/auth';
+// Change this line (Line 9):
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/auth';
 
 function LoginPage() {
   const [email, setEmail] = useState('');

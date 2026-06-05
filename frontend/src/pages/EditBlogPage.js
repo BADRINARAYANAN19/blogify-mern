@@ -6,7 +6,8 @@ import './EditBlogPage.css';
 
 // 🔥 REMOVED NEON COLOR DEFINITIONS (Using standard MUI colors now)
 
-const BACKEND_URL = 'http://localhost:5000/api/blogs';
+// Change this line:
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/blogs';
 
 function EditBlogPage() {
     const { id } = useParams();
