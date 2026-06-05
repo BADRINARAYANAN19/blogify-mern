@@ -1,8 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
 
-// REMOVED: import Navbar from './components/Navbar'; 
-
 // Authentication Pages
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -13,36 +11,33 @@ import CreateBlogPage from './pages/CreateBlogPage';
 import SingleBlogPage from './pages/SingleBlogPage';
 import EditBlogPage from './pages/EditBlogPage';
 
-// 🔒 Protected Route Wrapper (No changes needed here)
+// 🔒 Protected Route Wrapper: Checks for token in localStorage
 function PrivateRoute({ children }) {
-  const token = localStorage.getItem("blogify-token");
-  return token ? children : <Navigate to="/login" />;
+  const token = localStorage.getItem("blogify-token");
+  // If no token, redirect to login page
+  return token ? children : <Navigate to="/login" />;
 }
 
 function App() {
-  return (
-    <BrowserRouter>
-      {/* 🛑 REMOVED: <Navbar /> */}
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
 
-      <Routes>
+        {/* Protected Routes: Only accessible if logged in */}
+        <Route path="/" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+        <Route path="/create" element={<PrivateRoute><CreateBlogPage /></PrivateRoute>} />
+        <Route path="/blog/:id" element={<PrivateRoute><SingleBlogPage /></PrivateRoute>} />
+        <Route path="/edit/:id" element={<PrivateRoute><EditBlogPage /></PrivateRoute>} />
 
-        {/* Authentication Routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-
-        {/* Protected Routes */}
-        <Route path="/" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
-        <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
-        <Route path="/create" element={<PrivateRoute><CreateBlogPage /></PrivateRoute>} />
-        <Route path="/blog/:id" element={<PrivateRoute><SingleBlogPage /></PrivateRoute>} />
-        <Route path="/edit/:id" element={<PrivateRoute><EditBlogPage /></PrivateRoute>} />
-
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" />} /> 
-
-      </Routes>
-    </BrowserRouter>
-  );
+        {/* Catch-all: Redirects to home/login if path doesn't exist */}
+        <Route path="*" element={<Navigate to="/" />} /> 
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
