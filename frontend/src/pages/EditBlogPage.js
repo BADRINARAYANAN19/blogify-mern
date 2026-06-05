@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Typography, TextField, Button, Box, Paper, CircularProgress, Alert } from '@mui/material';
+import { Container, TextField, Button, Box, Paper, CircularProgress, Alert, Typography } from '@mui/material';
+import './EditBlogPage.css';
 
 // 🔥 REMOVED NEON COLOR DEFINITIONS (Using standard MUI colors now)
 
@@ -95,17 +96,10 @@ function EditBlogPage() {
                     // 🔥 REMOVED NEON GLOW STYLES
                 }}
             >
-                <Typography 
-                    variant="h3" component="h1" gutterBottom align="center"
-                    sx={{ 
-                        fontWeight: 700, 
-                        color: 'primary.main', // Standard Primary color for accent
-                        // 🔥 REMOVED TEXT SHADOW/NEON STYLES
-                        mb: 4 
-                    }}
-                >
-                    Editing: {title.substring(0, 30)}...
-                </Typography>
+                <div className="edit-header">
+                    <h2>Editing: {title.substring(0, 30)}...</h2>
+                    <p>Update your title and content below, then click publish.</p>
+                </div>
                 
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                     <TextField

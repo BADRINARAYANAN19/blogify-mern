@@ -82,7 +82,7 @@ function CreateBlogPage() {
       <Paper elevation={12} className="create-blog-card">
         <Typography
           variant="h4"
-          component="h1"
+          component="h2"
           gutterBottom
           className="card-header"
         >
@@ -140,5 +140,4 @@ function CreateBlogPage() {
     </Container>
   );
 }
-
 export default CreateBlogPage;

@@ -150,24 +150,24 @@ function SingleBlogPage() {
         </Button>
       </Box>
 
-      <Paper elevation={3} className="single-blog-paper">
+      <Paper elevation={3} className="blog-content-card">
         <Box p={3}>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant="h4" className="blog-title">
                 {blog.title}
               </Typography>
-              <Typography variant="subtitle2" color="textSecondary">
-                By: {blog.user ? blog.user.username : 'Unknown'} | Published on:{' '}
-                {new Date(blog.createdAt).toLocaleDateString()}
+              <Typography variant="subtitle2" className="blog-metadata">
+                By: {blog.user ? blog.user.name : 'Unknown'} | Published on:{' '}
+                {new Date(blog.date).toLocaleDateString()}
               </Typography>
             </Grid>
 
             {isOwner && (
-              <Grid item>
+              <Grid item className="action-buttons-group">
                 <Button
                   variant="outlined"
-                  color="primary"
+                  color="warning"
                   startIcon={<EditIcon />}
                   onClick={() => navigate(`/edit/${blog._id}`)}
                   disabled={isDeleting}
@@ -189,7 +189,7 @@ function SingleBlogPage() {
           </Grid>
 
           <Box mt={3}>
-            <Typography variant="body1" className="single-blog-content">
+            <Typography variant="body1" className="blog-body">
               {blog.content}
             </Typography>
           </Box>

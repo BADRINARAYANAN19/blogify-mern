@@ -14,7 +14,7 @@ router.get('/', auth, async (req, res) => {
   try {
     const blogs = await Blog.find({ user: req.user.id })
       .sort({ date: -1 })
-      .populate('user', ['username', '_id']);
+      .populate('user', ['name', '_id']);
 
     return res.json(blogs);
   } catch (err) {
@@ -32,7 +32,7 @@ router.get('/', auth, async (req, res) => {
 router.get('/:id', auth, async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id).populate('user', [
-      'username',
+      'name',
       '_id',
     ]);
 
@@ -113,7 +113,7 @@ router.put('/:id', auth, async (req, res) => {
       { _id: req.params.id },
       { $set: blogFields },
       { new: true }
-    ).populate('user', ['username', '_id']);
+    ).populate('user', ['name', '_id']);
 
     return res.json(blog);
   } catch (err) {
