@@ -1,7 +1,7 @@
 require('dotenv').config(); 
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
+const cors = require("cors"); // --- Ore oru murai dhaan import panna vendum ---
 const path = require("path");
 const app = express();
 
@@ -16,7 +16,8 @@ const connectDB = async () => {
 };
 connectDB();
 
-const cors = require('cors');
+// --- MIDDLEWARE ---
+// CORS-ai express.json()-kku mela use panna vendum
 app.use(cors({
     origin: "*", 
     methods: ["GET", "POST", "PUT", "DELETE"],
