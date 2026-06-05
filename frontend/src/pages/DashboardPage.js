@@ -30,9 +30,10 @@ function DashboardPage() {
 
         try {
             // Using the imported BACKEND_URL
-            const res = await axios.get(`${BACKEND_URL}/blogs`, {
-                headers: { 'x-auth-token': token },
-            });
+            // Change this line (inside fetchUserBlogs function):
+const res = await axios.get(`${BACKEND_URL}/blogs`, { // Ensure BACKEND_URL ends with /api
+    headers: { 'x-auth-token': token },
+});
             setBlogs(res.data);
         } catch (err) {
             console.error("Failed to fetch blogs:", err.response?.data);
