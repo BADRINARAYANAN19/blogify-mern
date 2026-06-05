@@ -5,8 +5,8 @@ import { Button, Box, Alert } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import './DashboardPage.css';
 
-// Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
+// Base URL points to /api
+const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-1.onrender.com/api';
 
 function DashboardPage() {
     const [blogs, setBlogs] = useState([]);
@@ -29,11 +29,10 @@ function DashboardPage() {
         }
 
         try {
-            // Using the imported BACKEND_URL
-            // Change this line (inside fetchUserBlogs function):
-const res = await axios.get(`${BACKEND_URL}/blogs`, { // Ensure BACKEND_URL ends with /api
-    headers: { 'x-auth-token': token },
-});
+            // FIXED: URL is now correct (e.g., .../api/blogs)
+            const res = await axios.get(`${BACKEND_URL}/blogs`, {
+                headers: { 'x-auth-token': token },
+            });
             setBlogs(res.data);
         } catch (err) {
             console.error("Failed to fetch blogs:", err.response?.data);
@@ -70,7 +69,6 @@ const res = await axios.get(`${BACKEND_URL}/blogs`, { // Ensure BACKEND_URL ends
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
-                {/* Optional chaining used here for safety */}
                 <h1>My Blog Posts ({blogs?.length || 0})</h1>
                 <p>Welcome back! Write, edit, and publish your blogs here.</p>
                 
@@ -115,7 +113,6 @@ const res = await axios.get(`${BACKEND_URL}/blogs`, { // Ensure BACKEND_URL ends
                 </div>
             ) : (
                 <div className="blogs-grid">
-                    {/* FIXED: Optional chaining used here to prevent crash */}
                     {blogs?.map((blog) => (
                         <div key={blog._id} className="blog-card" onClick={() => navigate(`/blog/${blog._id}`)}>
                             <h3>{truncateContent(blog.title, 50)}</h3>
