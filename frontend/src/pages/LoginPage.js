@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../config';
 import { useNavigate, Link } from 'react-router-dom';
 import { Typography, TextField, Button, Box, Paper, Alert, CircularProgress } from '@mui/material';
-
-// Change this line (Line 9):
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api/auth';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -27,7 +24,7 @@ function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${BACKEND_URL}/login`, { email, password });
+      const res = await API.post('/auth/login', { email, password });
       localStorage.setItem('blogify-token', res.data.token);
       navigate('/');
     } catch (err) {

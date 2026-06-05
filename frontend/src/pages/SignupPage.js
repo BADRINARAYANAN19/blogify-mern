@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../config';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   Typography,
@@ -17,9 +17,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // Note: We don't need './LoginPage.css' if we use the inline style method below.
 // If you have common styles, keep it, but the theme is handled inline here.
-
-// Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -61,8 +58,8 @@ function SignupPage() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `${BACKEND_URL}/auth/signup`,
+      const response = await API.post(
+        '/auth/signup',
         {
           name: name.trim(),
           email: email.trim(),

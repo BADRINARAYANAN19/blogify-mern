@@ -1,6 +1,6 @@
 // src/pages/CreateBlogPage.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import API from '../config';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -11,9 +11,6 @@ import {
   CircularProgress,
 } from '@mui/material';
 import './CreateBlogPage.css';
-
-// Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function CreateBlogPage() {
   const [title, setTitle] = useState('');
@@ -46,8 +43,8 @@ function CreateBlogPage() {
     }
 
     try {
-      await axios.post(
-        `${BACKEND_URL}/blogs`,
+      await API.post(
+        '/blogs',
         { title: title.trim(), content: content.trim() },
         {
           headers: {

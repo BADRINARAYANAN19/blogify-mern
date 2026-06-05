@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../config';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, Alert } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import './DashboardPage.css';
-
-// Base URL points to /api
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-1.onrender.com/api';
 
 function DashboardPage() {
     const [blogs, setBlogs] = useState([]);
@@ -29,8 +26,7 @@ function DashboardPage() {
         }
 
         try {
-            // FIXED: URL is now correct (e.g., .../api/blogs)
-            const res = await axios.get(`${BACKEND_URL}/blogs`, {
+            const res = await API.get('/blogs', {
                 headers: { 'x-auth-token': token },
             });
             setBlogs(res.data);

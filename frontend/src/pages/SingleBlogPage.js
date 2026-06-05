@@ -1,6 +1,6 @@
 // SingleBlogPage.js
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import API from '../config';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -16,9 +16,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './SingleBlogPage.css';
-
-// Change this line:
-const BACKEND_URL = process.env.REACT_APP_API_URL || 'https://blogify-mern-ozvw.onrender.com/api';
 
 function SingleBlogPage() {
   const { id } = useParams();
@@ -36,7 +33,7 @@ function SingleBlogPage() {
     const token = localStorage.getItem('blogify-token');
 
     try {
-      const res = await axios.get(`${BACKEND_URL}/blogs/${id}`, {
+      const res = await API.get(`/blogs/${id}`, {
         headers: token ? { 'x-auth-token': token } : {},
       });
 
@@ -92,7 +89,7 @@ function SingleBlogPage() {
     const token = localStorage.getItem('blogify-token');
 
     try {
-      await axios.delete(`${BACKEND_URL}/blogs/${id}`, {
+      await API.delete(`/blogs/${id}`, {
         headers: { 'x-auth-token': token },
       });
       alert(`Blog "${blog.title}" deleted successfully.`);
