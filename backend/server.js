@@ -59,3 +59,5 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // Vercel function-kku export pannanum
 module.exports = app;
+const cors = require('cors');
+app.use(cors()); // Ithu irukkuna dhaan frontend backend-kooda pesa mudiyum.
